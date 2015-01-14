@@ -9,16 +9,15 @@ var outer = function(){
 //Above you're given a function that returns another function which has a closure over the name variable.
 //Invoke outer saving the return value into another variable called 'inner'.
 
-  //Code Here
+
+var inner = outer();    //inner equals whatever outer() returns..
 
 //Once you do that, invoke inner.
 
-  //Code Here
-
+inner();
 
 
 //Next problem
-
 
 
 var callFriend = function(){
@@ -32,8 +31,9 @@ var callFriend = function(){
 //Above you're given a callFriend function that returns another function.
 //Do what you need to do in order to call your function and get 'Calling Jake at 435-215-9248' in your console.
 
-  //Code Here
+var call = callFriend();
 
+call("435-215-9248");
 
 
 //Next Problem
@@ -44,14 +44,19 @@ var callFriend = function(){
   Write a function called makeCounter that makes the following code work properly.
 */
 
-  //Code Here
-  var count = makeCounter();
+var makeCounter = function() {
+  var counter = 0;
+  return function() {
+    counter = counter + 1;
+    return counter
+  }
+}
+
+var count = makeCounter();
   count() // 1
   count() // 2
   count() // 3
   count() // 4
-
-
 
 //Next Problem
 
@@ -60,9 +65,111 @@ var callFriend = function(){
 /*
   Write a function that accepts another function as it's only argument and returns a new function
   (which invokes the original function that was passed in) that can only ever be executed once.
-  Once completed, add a second arguments that allows the function to be invoked N number of times.
-  After the function has been called N number of times, console.log('STAHHP');
 */
+  
+
+var outer = function(func2) {
+  var counter = 0
+    return function() {
+      if (counter === 0) {
+        func2();
+        counter = 1;
+    }
+  }
+};
+
+
+var passIn = function() {
+  console.log("I\'m a function");
+}
+
+var inner = outer(passIn);
+
+// Once completed, add a second arguments that allows the function to be invoked N number of times.
+// After the function has been called N number of times, console.log('STAHHP');
+
+var outer = function(func2, N) {
+  var counter = 1
+    return function() {
+      if (counter <= N) {
+        func2();
+        counter++;
+    } else {
+      console.log('STAHHP');
+    }
+  }
+};
+
+
+var passIn = function() {
+  console.log("I\'m a function");
+}
+
+var inner = outer(passIn, 3);
+
+inner();
+inner();
+inner();
+inner();
+inner();
+inner();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
